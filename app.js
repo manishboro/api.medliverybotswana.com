@@ -10,6 +10,8 @@ app.use(express.json(), cors());
 
 app.get("/", (req, res) => res.send("<h1>Welcome to Medlivery</h1>"));
 
+app.use("/auth", require("./routes/auth"));
+
 app.use(globalErrorHandler);
 
 module.exports = app;

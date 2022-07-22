@@ -4,14 +4,11 @@ const { nanoid } = require("nanoid");
 
 const patientSchema = new mongoose.Schema({
   uid: { type: String, default: () => nanoid(), unique: true },
-  loginProviderId: {
-    type: String,
-    required: [true, "Required loginProviderId"],
-  },
-  displayName: { type: String },
-  firstName: { type: String },
-  middleName: { type: String },
-  lastName: { type: String },
+  login_provider_id: { type: String, required: [true, "Required loginProviderId"] },
+  display_name: { type: String },
+  first_name: { type: String },
+  middle_name: { type: String },
+  last_name: { type: String },
   gender: { type: String, enum: ["male", "female", "others"] },
   email: {
     type: String,
@@ -20,26 +17,30 @@ const patientSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, "Please provide a valid email"],
   },
-  profilePic: { type: String, default: "/static/icons/avatar.png" },
-  disableProfilePic: { type: Boolean, default: false },
-  dateOfBirth: {
+  email_verified: { type: Boolean },
+  login_pin: { type: String, select: false, length: 4 },
+  is_login_pin: { type: Boolean, default: false },
+  photo_url: {
     type: String,
-    required: [true, "Please tell us your date of birth"],
+    default: "https://d1dy7octuuq2cp.cloudfront.net/assets/images/avatar.png",
   },
-  mobileNo: { type: String, unique: true },
+  disable_profile_pic: { type: Boolean, default: false },
+  date_of_birth: { type: String },
+  mobile: { type: String },
   state: { type: String },
   city: { type: String },
   address: { type: String },
   zipcode: { type: String },
   latitude: { type: String },
   longitude: { type: String },
-  organizationId: { type: mongoose.Schema.Types.ObjectId, ref: "Organization" },
-  organizationType: { type: String },
-  loginType: {
+  organization_id: { type: mongoose.Schema.Types.ObjectId, ref: "Organization" },
+  organization_type: { type: String },
+  login_type: {
     type: String,
     enum: ["google", "facebook", "twitter", "microsoft", "phone", "password"],
+    required: [true, "Please provide login type"],
   },
-  isActive: { type: Boolean, default: true },
+  is_active: { type: Boolean, default: true },
 });
 
 const Patient = mongoose.model("Patient", patientSchema);

@@ -20,7 +20,7 @@ mongoose
 
 // listening on a specified port
 const PORT = process.env.PORT || 9003;
-app.listen(PORT, () => console.log(`server running on ${PORT}!`));
+app.listen(PORT, () => console.log(`Server running on ${PORT}!`));
 
 //to handle unhandled rejection / errors occurred in asynchronous code
 process.on("unhandledRejection", (err) => {
