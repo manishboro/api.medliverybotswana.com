@@ -27,6 +27,7 @@ const patientSchema = new mongoose.Schema({
   disable_profile_pic: { type: Boolean, default: false },
   date_of_birth: { type: String },
   mobile: { type: String },
+  country: { type: String },
   state: { type: String },
   city: { type: String },
   address: { type: String },
@@ -40,6 +41,7 @@ const patientSchema = new mongoose.Schema({
     enum: ["google", "facebook", "twitter", "microsoft", "phone", "password"],
     required: [true, "Please provide login type"],
   },
+  terms_and_conditions: { type: Boolean, default: true },
   is_active: { type: Boolean, default: true },
 });
 
